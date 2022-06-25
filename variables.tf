@@ -1,6 +1,6 @@
 variable "use_spot_instance" {
-  type    = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Whether to use spot instance. These are cheaper but will have less persistence."
 }
 
@@ -46,8 +46,8 @@ variable "r53_domain" {
 }
 
 variable "server_instance_types" {
-  type    = list(string)
-  default = ["t4g.small"]
+  type        = list(string)
+  default     = ["t4g.small"]
   description = "Possible types of instance to use."
 }
 
