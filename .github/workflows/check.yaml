@@ -1,0 +1,18 @@
+on:
+  push:
+jobs:
+  formatAndValidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v2
+      - name: fmt
+        run: terraform fmt -check --recursive --diff
+        shell: bash
+      - name: init
+        run: terraform init --backend=false
+        shell: bash
+      - name: validate
+        run: terraform validate -no-color
+        shell: bash
+
