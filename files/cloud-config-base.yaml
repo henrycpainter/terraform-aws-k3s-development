@@ -1,0 +1,14 @@
+#cloud-config
+%{ if length(ssh_keys) > 0 }
+ssh_authorized_keys:
+%{ for ssh_key in ssh_keys }
+- ${ssh_key}
+%{ endfor }
+%{ endif }
+packages:
+- software-properties-common
+- unzip
+- zip
+runcmd:
+- apt-get update
+- DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
