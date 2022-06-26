@@ -20,11 +20,11 @@ provider "aws" {
 module "k3s" {
   source = "../.." # Replace with e.g. "henrycpainter/k3s-development"
   #version = "0.0.1"
-  name = "my-k3s-demo"
-  domain   = "myownDomain.com"
+  name           = "my-k3s-demo"
+  domain         = "myownDomain.com"
   public_subnets = [aws.subnet.public.id]
-  use_route53 = true
-  vpc_id = aws.vpc.this.id
+  use_route53    = true
+  vpc_id         = aws.vpc.this.id
   providers = {
     aws     = aws
     aws.r53 = aws.global
