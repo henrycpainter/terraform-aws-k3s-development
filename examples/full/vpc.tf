@@ -44,7 +44,7 @@ resource "aws_route_table" "public" {
 resource "aws_route" "public_internet_gateway" {
   route_table_id         = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.main.id
+  gateway_id             = aws_internet_gateway.this.id
   timeouts {
     create = "5m"
   }
@@ -53,11 +53,11 @@ resource "aws_route" "public_internet_gateway" {
 resource "aws_route" "public_internet_gateway_ipv6" {
   route_table_id              = aws_route_table.public.id
   destination_ipv6_cidr_block = "::/0"
-  gateway_id                  = aws_internet_gateway.main.id
+  gateway_id                  = aws_internet_gateway.this.id
 }
 
 resource "aws_route_table_association" "public" {
-  count          = length(local.public_subnets)
+  count          = 1
   subnet_id      = element(aws_subnet.public[*].id, count.index)
   route_table_id = aws_route_table.public.id
 }
