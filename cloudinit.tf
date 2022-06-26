@@ -21,9 +21,9 @@ data "cloudinit_config" "k3s_server" {
         install_k3s_version = local.install_k3s_version,
         k3s_exec            = local.server_k3s_exec,
         k3s_cluster_secret  = local.k3s_cluster_secret,
-        k3s_url             = local.create_external_nlb == 1 ? aws_lb.lb[0].dns_name : aws_eip.this[0].private_dns,
+        k3s_url             = aws_eip.this[0].private_dns,
         k3s_tls_san         = local.k3s_tls_san,
-        eip_id              = var.simplest ? aws_eip.this[0].id : "",
+        eip_id              = aws_eip.this[0].id
     })
   }
 
