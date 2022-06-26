@@ -22,9 +22,9 @@ module "k3s" {
   #version = "0.0.1"
   name           = "my-k3s-demo"
   domain         = "myownDomain.com"
-  public_subnets = [aws.subnet.public.id]
+  public_subnets = [aws_subnet.public.id]
   use_route53    = true
-  vpc_id         = aws.vpc.this.id
+  vpc_id         = aws_vpc.this.id
   providers = {
     aws     = aws
     aws.r53 = aws.global

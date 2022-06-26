@@ -1,6 +1,13 @@
 #VPC Level
+
+locals {
+  vpc_name       = "myVpc"
+  cidr           = "10.1.0.0/16"
+  public_subnets = ["10.1.101.0/24", "10.1.102.0/24", "10.1.103.0/24"]
+}
+
 resource "aws_vpc" "this" {
-  cidr_block           = local.cidr
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
   enable_dns_support   = true
 }
@@ -10,17 +17,21 @@ resource "aws_internet_gateway" "this" {
 }
 
 #Subnets
+
+data "aws_availability_zones" "available" {
+  state = "available"
+}
 resource "aws_subnet" "public" {
   count                           = 1
   vpc_id                          = aws_vpc.this.id
   cidr_block                      = element(concat(local.public_subnets, [""]), count.index)
-  availability_zone               = element(local.azs, count.index)
+  availability_zone               = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch         = false
   assign_ipv6_address_on_creation = null
   tags = {
     "Name" = format(
       "${local.vpc_name}-public-%s",
-      element(local.azs, count.index),
+      element(data.aws_availability_zones.available.names, count.index),
     )
   }
 }
