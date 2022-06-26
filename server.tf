@@ -77,7 +77,7 @@ resource "aws_ssm_parameter" "k3sCerts" {
   value    = " "
   lifecycle {
     ignore_changes = [
-      "value",
+      value,
     ]
   }
 }
@@ -89,7 +89,7 @@ resource "aws_ssm_parameter" "k3sConfig" {
   value = " "
   lifecycle {
     ignore_changes = [
-      "value",
+      value,
     ]
   }
 }

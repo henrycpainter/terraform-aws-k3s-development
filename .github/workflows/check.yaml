@@ -11,8 +11,10 @@ jobs:
         shell: bash
       - name: init
         run: terraform init --backend=false
+        working-directory: 'examples/full'
         shell: bash
       - name: validate
+        working-directory: 'examples/full'
         run: terraform validate -no-color
         shell: bash
 
