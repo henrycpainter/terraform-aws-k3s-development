@@ -35,13 +35,6 @@ resource "aws_iam_policy" "cluster_autoscaler" {
       {
         Effect = "Allow"
         Action = [
-          "autoscaling:DescribeAutoScalingGroups",
-          "autoscaling:DescribeAutoScalingInstances",
-          "autoscaling:DescribeLaunchConfigurations",
-          "autoscaling:SetDesiredCapacity",
-          "autoscaling:TerminateInstanceInAutoScalingGroup",
-          "autoscaling:DescribeTags",
-          "ec2:DescribeLaunchTemplateVersions",
           "ssm:*",
           "ec2:AssociateAddress"
         ],
